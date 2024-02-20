@@ -32,45 +32,53 @@
       <div class="col-sm-8">
         <div class="row masonry">
           <!-- Post Item -->
+          {% for post in posts %}
           <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
             <div class="post-prev-img">
-              <a href="blog-single-sidebar-left.html"
-                ><img src="{% static 'images/blog/post-prev-1.jpg' %}" alt=""
+              <a href="{% url 'blog:single' pid=post.id %}"
+                ><img src="{{post.image.url}}" alt=""
               /></a>
             </div>
 
             <div class="post-prev-title font-alt">
-              <a href="">New Web Design Trends</a>
+              <a href="{% url 'blog:single' pid=post.id %}">{{post.title}}</a>
             </div>
 
             <div class="post-prev-info font-alt">
-              <a href="">John Doe</a> | 10 December
+              {{post.published_date|date:"d M Y"}} | <a href="{% url 'blog:author' author_username=post.author.username %}">{{post.author.get_full_name}}</a> | {{post.counted_view}} بازدید | {% comments_count pid=post.id %} نظر
+            </div>
+
+            <div class="post-prev-info font-alt">
+              {% for cat in post.category.all %}
+              <a href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a>{% if not forloop.last %},{% endif %} {% endfor %}
             </div>
 
             <div class="post-prev-text">
-              Maecenas volutpat, diam enim sagittis quam, id porta quam. Sed id
-              dolor consectetur fermentum nibh volutpat, accumsan purus.
+              {{post.content|truncatewords_html:25}}
             </div>
 
             <div class="post-prev-more">
-              <a href="" class="btn btn-mod btn-gray btn-round"
-                >Read More <i class="fa fa-angle-left"></i
+              <a href="{% url 'blog:single' pid=post.id %}" class="btn btn-mod btn-gray btn-round"
+                >مشاهده بیشتر<i class="fa fa-angle-left"></i
               ></a>
             </div>
           </div>
+          {% endfor %}
           <!-- End Post Item -->
 
         </div>
 
         <!-- Pagination -->
         <div class="pagination">
-          <a href=""><i class="fa fa-angle-right"></i></a>
-          <a href="" class="active">1</a>
-          <a href="">2</a>
-          <a href="">3</a>
-          <a class="no-active">...</a>
-          <a href="">9</a>
-          <a href=""><i class="fa fa-angle-left"></i></a>
+          {% if posts.has_previous %}
+          <a href="?page={{posts.previous_page_number}}"><i class="fa fa-angle-right"></i></a>
+          {% endif %} {% for i in posts.paginator.page_range %} {% if page_number == i %}
+          <a href="?page={{i}}" class="active">1</a>
+          {% else %}
+          <a href="?page={{i}}">{{i}}</a>
+          {% endif %} {% endfor %} {% if posts.has_next %}
+          <a href="?page={{posts.next_page_number}}"><i class="fa fa-angle-left"></i></a>
+          {% endif %}
         </div>
         <!-- End Pagination -->
       </div>
@@ -79,152 +87,19 @@
       <!-- Sidebar -->
       <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
         <!-- Search Widget -->
-        <div class="widget">
-          <form class="form-inline form" method="get" action="{% url 'blog:search' %}">
-            <div class="search-wrap">
-              <button
-                class="search-button animate"
-                type="submit"
-                title="Start Search"
-              >
-                <i class="fa fa-search"></i>
-              </button>
-              <input
-                type="text"
-                name="s"
-                class="form-control search-field"
-                placeholder="جستجو کنید"
-              />
-            </div>
-          </form>
-        </div>
+        {% include 'blog/blog-search.html' %}
         <!-- End Search Widget -->
 
-        <!-- Widget -->
-        <div class="widget">
-          <h5 class="widget-title font-alt">Categories</h5>
-
-          <div class="widget-body">
-            <ul class="clearlist widget-menu">
-              <li>
-                <a href="#" title="">Branding</a>
-                <small> - 7 </small>
-              </li>
-              <li>
-                <a href="#" title="">Design</a>
-                <small> - 15 </small>
-              </li>
-              <li>
-                <a href="#" title="">Development</a>
-                <small> - 3 </small>
-              </li>
-              <li>
-                <a href="#" title="">Photography</a>
-                <small> - 5 </small>
-              </li>
-              <li>
-                <a href="#" title="">Other</a>
-                <small> - 1 </small>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <!-- Widget Categories -->
+        {% postcategories %}
         <!-- End Widget -->
 
-        <!-- Widget -->
-        <div class="widget">
-          <h5 class="widget-title font-alt">Tags</h5>
-
-          <div class="widget-body">
-            <div class="tags">
-              <a href="">Design</a>
-              <a href="">Portfolio</a>
-              <a href="">Digital</a>
-              <a href="">Branding</a>
-              <a href="">Theme</a>
-              <a href="">Clean</a>
-              <a href="">UI & UX</a>
-              <a href="">Love</a>
-            </div>
-          </div>
-        </div>
+        <!-- Widget Tags -->
+        {% include 'blog/blog-tags.html' %}
         <!-- End Widget -->
 
-        <!-- Widget -->
-        <div class="widget">
-          <h5 class="widget-title font-alt">Last posts</h5>
-
-          <div class="widget-body">
-            <ul class="clearlist widget-posts">
-              <li class="clearfix">
-                <a href=""
-                  ><img
-                    src="{% static 'images/blog/previews/post-prev-1.jpg' %}"
-                    alt=""
-                    class="widget-posts-img"
-                /></a>
-                <div class="widget-posts-descr">
-                  <a href="#" title="">Minimalistic Design Forever</a>
-                  Posted by John Doe 7 Mar
-                </div>
-              </li>
-              <li class="clearfix">
-                <a href=""
-                  ><img
-                    src="{% static 'images/blog/previews/post-prev-2.jpg' %}"
-                    alt=""
-                    class="widget-posts-img"
-                /></a>
-                <div class="widget-posts-descr">
-                  <a href="#" title=""
-                    >Ipsum dolor sit amet, consectetur adipiscing elit</a
-                  >
-                  Posted by John Doe 7 Mar
-                </div>
-              </li>
-              <li class="clearfix">
-                <a href=""
-                  ><img
-                    src="{% static 'images/blog/previews/post-prev-3.jpg' %}"
-                    alt=""
-                    class="widget-posts-img"
-                /></a>
-                <div class="widget-posts-descr">
-                  <a href="#" title="">New Web Design Trends in 2015 year</a>
-                  Posted by John Doe 7 Mar
-                </div>
-              </li>
-              <li class="clearfix">
-                <a href=""
-                  ><img
-                    src="{% static 'images/blog/previews/post-prev-4.jpg' %}"
-                    alt=""
-                    class="widget-posts-img"
-                /></a>
-                <div class="widget-posts-descr">
-                  <a href="#" title=""
-                    >Hipster’s Style in Web Design and Logo</a
-                  >
-                  Posted by John Doe 7 Mar
-                </div>
-              </li>
-              <li class="clearfix">
-                <a href=""
-                  ><img
-                    src="{% static 'images/blog/previews/post-prev-5.jpg' %}"
-                    alt=""
-                    class="widget-posts-img"
-                /></a>
-                <div class="widget-posts-descr">
-                  <a href="#" title=""
-                    >Duis tristique condimentum nulla, bibendum consectetu</a
-                  >
-                  Posted by John Doe 7 Mar
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <!-- Widget Last posts -->
+        {% latestposts %}
         <!-- End Widget -->
 
       </div>

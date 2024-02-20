@@ -1,0 +1,24 @@
+{% load static %}
+
+
+<div class="widget">
+  <h5 class="widget-title font-alt">آخرین اخبار</h5>
+
+  <div class="widget-body">
+    <ul class="clearlist widget-posts">
+    {% for post in posts %}
+      <li class="clearfix">
+        <a href="{% url 'blog:single' pid=post.id %}">
+          <img
+            src="{{post.image.url}}"
+            alt=""
+            class="widget-posts-img"
+          />
+        </a>
+        <a href="{% url 'blog:single' pid=post.id %}" >{{post.title}}</a>
+        انتشار در {{post.published_date|date:"d M Y"}}
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
