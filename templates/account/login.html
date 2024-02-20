@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Head Section -->
+<section class="small-section bg-dark-lighter">
+  <div class="relative container align-right">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">اکانت کاربری</h1>
+      </div>
+
+      <div class="col-md-4 mt-30">
+        <div class="mod-breadcrumbs font-alt align-left">
+          <a href="{% url 'website:home' %}">خانه</a>&nbsp;/&nbsp;<span
+            >اکانت کاربری</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Head Section -->
+
+<!-- Section -->
+<section class="page-section">
+  <div class="container relative">
+    <!-- Tab panes -->
+    <div class="tab-content tpl-minimal-tabs-cont section-text">
+      <div class="tab-pane fade in active" id="mini-one">
+        <!-- Login Form -->
+        <div class="row">
+          <h3 style="text-align: center;">ورود</h3>
+          <p style="text-align: center;">اگر حساب کاربری ندارید، ابتدا
+            <a href="{{ signup_url }}">ثبت نام</a> کنید.</p>
+          <div class="col-md-4 col-md-offset-4">
+            <form
+              class="form contact-form"
+              method="post"
+              action="{% url 'account_login' %}"
+            >
+              {{ form.non_field_errors | safe }} 
+              {% csrf_token %}
+              <div class="clearfix">
+                <!-- Username -->
+                <div class="form-group">
+                  {{ form.login }} 
+                  {{ form.login.errors|safe }}
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                  {{ form.password }} 
+                  {{ form.password.errors|safe }}
+                </div>
+
+                <div class="form-group">
+                  <label
+                    for="{{form.remember.id_for_label}}"
+                    class="form-check-label"
+                    >مرا به خاطر بسپار</label
+                  >
+                  {{ form.remember }}
+                  <a
+                  class="button secondaryAction text-accent"
+                  href="{% url 'account_reset_password' %}"
+                  >فراموشی رمز عبور</a
+                >
+                </div>
+              </div>
+
+              <div class="clearfix">
+                <div class="cf-right-col">
+                  <!-- Inform Tip -->
+                  <div class="form-tip pt-20">
+                    {% if redirect_field_value %}
+                    <input
+                      type="hidden"
+                      name="{{ redirect_field_name }}"
+                      value="{{ redirect_field_value }}"
+                    />
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="cf-left-col">
+                  <!-- Send Button -->
+                  <div class="align-left pt-10">
+                    <button
+                      class="submit_btn btn btn-mod btn-medium btn-round btn-full"
+                      type="submit"
+                    >
+                      ورود
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Login Form -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Section -->
+
+{% endblock content %}

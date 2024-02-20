@@ -37,9 +37,9 @@ def blog_single(request, pid):
         form = CommentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "Your comment has sent successfully.")
+            messages.add_message(request, messages.SUCCESS, "نظر شما با موفقیت ثبت شد.")
         else:
-            messages.add_message(request, messages.ERROR, "Your comment send failed!")
+            messages.add_message(request, messages.ERROR, "نظر شما ثبت نشد!")
             
     # posts = Post.objects.filter(published_date__lte=datetime.now(tz=timezone.utc), status=True)
     # post = get_object_or_404(posts, id = pid)

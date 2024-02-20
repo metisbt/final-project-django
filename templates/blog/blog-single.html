@@ -87,6 +87,15 @@
         <div class="mb-80 mb-xs-40">
           <h4 class="blog-page-title font-alt">نظر خود را به اشتراک بگذارید</h4>
 
+          {% if messages %} {% for message in messages %}
+          <div id="result">
+            <div
+            class="alert {% if message.tags == 'success' %} alert-{{ message.tags }} {% elif message.tags == 'error' %} alert-warning {% endif %}"
+          >
+            {{ message|safe }}
+          </div>
+          </div>
+          {% endfor %} {% endif %}
           <!-- Form -->
           <form method="post" action="{% url 'blog:single' pid=post.id %}" class="form">
             {% csrf_token %}
@@ -144,8 +153,10 @@
                 placeholder="نظر شما"
                 maxlength="400"
               ></textarea>
+              <br>
+              {{form.captcha}}
             </div>
-
+          
             <!-- Send Button -->
             <button type="submit" class="btn btn-mod btn-medium">
               ارسال نظر

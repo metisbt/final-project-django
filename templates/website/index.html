@@ -526,6 +526,16 @@
             با خبرنامه ما در جریان باشید
           </div>
 
+          {% if messages %} {% for message in messages %}
+          <div id="result">
+            <div
+            class="alert {% if message.tags == 'success' %} alert-{{ message.tags }} {% elif message.tags == 'error' %} alert-warning {% endif %}"
+          >
+            {{ message|safe }}
+          </div>
+          </div>
+          {% endfor %} {% endif %}
+
           <div class="mb-20">
             <input
               placeholder="ایمیل خود را وارد کنید"
@@ -533,6 +543,7 @@
               name="email"
               pattern=".{5,100}"
               required
+              id="newsletter"
             />
 
             <button

@@ -15,9 +15,9 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "Your message has sent successfully.")
+            messages.add_message(request, messages.SUCCESS, "پیام شما با موفقیت ارسال شد.")
         else:
-            messages.add_message(request, messages.ERROR, "Your message send failed!")
+            messages.add_message(request, messages.ERROR, "پیام شما ارسال نشد!")
 
     form = ContactForm()
     return render(request, 'website/contact.html', {'form': form})
@@ -27,6 +27,9 @@ def newsletter_view(request):
         form = NewsletterForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            messages.add_message(request, messages.SUCCESS, "ایمیل شما با موفقیت ثبت شد")
     else:
-        return HttpResponseRedirect('/')
+        messages.add_message(request, messages.ERROR, "ایمیل شما ثبت نشد!")
+    
+    form = NewsletterForm()
+    return render(request, 'website/index.html', {'form': form})

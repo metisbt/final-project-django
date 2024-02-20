@@ -135,6 +135,7 @@
           <div class="clearfix">
             <div class="cf-right-col">
               <!-- Inform Tip -->
+              {{form.captcha}}
               <div class="form-tip pt-20">
                 <i class="fa fa-info-circle"></i> تمامی موارد ضروری میباشند
               </div>
@@ -153,7 +154,15 @@
             </div>
           </div>
 
-          <div id="result"></div>
+          {% if messages %} {% for message in messages %}
+          <div id="result">
+            <div
+            class="alert {% if message.tags == 'success' %} alert-{{ message.tags }} {% elif message.tags == 'error' %} alert-warning {% endif %}"
+          >
+            {{ message|safe }}
+          </div>
+          </div>
+          {% endfor %} {% endif %}
         </form>
       </div>
     </div>
