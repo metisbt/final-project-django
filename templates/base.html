@@ -87,6 +87,36 @@
               </li>
               <!-- End Item With Sub -->
 
+              {% if request.user.is_authenticated %}
+
+              <li>
+                <a href="{% url 'account_logout' %}" class="mn-has-sub"
+                  >خروج</i
+                ></a>
+              </li>
+
+              <li>
+                <a href="" class="mn-has-sub"
+                  >{{request.user.username}}</i
+                ></a>
+              </li>
+
+              {% else %}
+
+              <li>
+                <a href="{% url 'account_login' %}" class="mn-has-sub"
+                  >ورود</i
+                ></a>
+              </li>
+
+              <li>
+                <a href="{% url 'account_signup' %}" class="mn-has-sub"
+                  >ثبت نام</i
+                ></a>
+              </li>
+
+              {% endif %}
+
               <!-- Divider -->
               <li><a>&nbsp;</a></li>
               <!-- End Divider -->
