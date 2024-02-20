@@ -33,3 +33,6 @@ def newsletter_view(request):
     
     form = NewsletterForm()
     return render(request, 'website/index.html', {'form': form})
+
+# def custom_404(request, exception=None):
+#     return render(request, '404.html', status=404)
