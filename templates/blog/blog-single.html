@@ -1,14 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <!-- Head Section -->
-<section class="small-section bg-gray-lighter">
+<section class="small-section bg-gray-lighter-blog-single">
   <div class="relative container align-right">
     <div class="row">
       <div class="col-md-8">
-        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Blog single</h1>
-        <div class="hs-line-4 font-alt black">
-          We share our best ideas in our blog
-        </div>
+        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">{{post.title}}</h1>
+
       </div>
 
       <div class="col-md-4 mt-30">

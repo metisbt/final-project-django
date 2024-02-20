@@ -1,0 +1,35 @@
+{% load static %} {% for post in posts %}
+
+<!-- Post Item -->
+<div
+  class="col-sm-6 col-md-4 col-lg-4 mb-md-50 wow fadeIn"
+  data-wow-delay="0.1s"
+  data-wow-duration="2s"
+>
+  <div class="post-prev-img">
+    <a href="{% url 'blog:single' pid=post.id %}"
+      ><img src="{{post.image.url}}" alt=""
+    /></a>
+  </div>
+
+  <div class="post-prev-title font-alt">
+    <a href="{% url 'blog:single' pid=post.id %}">{{post.title}}</a>
+  </div>
+
+  <div class="post-prev-info font-alt">
+    <a href="">{{post.author.get_full_name}}</a> | {{post.published_date|date:"d M Y"}}
+  </div>
+
+  <div class="post-prev-text">
+    {{post.content|truncatewords_html:25}}
+  </div>
+
+  <div class="post-prev-more">
+    <a href="{% url 'blog:single' pid=post.id %}" class="btn btn-mod btn-gray btn-round"
+      >بیشتر بخوانید<i class="fa fa-angle-left"></i
+    ></a>
+  </div>
+</div>
+<!-- End Post Item -->
+
+{% endfor %}

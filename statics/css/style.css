@@ -2426,6 +2426,11 @@ a.logo:hover{
 .bg-gray-lighter{
     background-color: #f8f8f8;
 }
+
+.bg-gray-lighter-blog-single {
+    background-color: #727272 !important;
+}
+
 .bg-dark,
 .bg-dark-lighter,
 .bg-dark-alfa-30,
