@@ -205,3 +205,5 @@ if not COMPRESS_ENABLED: ##django compressor
     COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
 COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"] ##django compressor
+
+AUTHENTICATION_BACKENDS = ['cpsite.backends.EmailThenUsernameModelBackend']
