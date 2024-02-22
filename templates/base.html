@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 
 <!DOCTYPE html>
 <html dir="rtl">
@@ -18,7 +19,7 @@
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="{% static '/images/favicon.png' %}" />
-
+    {% compress css %}
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.min.css' %}" />
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="{% static 'css/vertical-rhythm.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+    {% endcompress %}
   </head>
   <body class="appear-animate">
     <!-- Page Loader -->
@@ -199,6 +201,7 @@
     <!-- End Page Wrap -->
 
     <!-- JS -->
+    {% compress js %}
     <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -218,12 +221,7 @@
       type="text/javascript"
       src="{% static 'js/jquery.magnific-popup.min.js' %}"
     ></script>
-    <!-- Replace test API Key "AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg" with your own one below 
-        **** You can get API Key here - https://developers.google.com/maps/documentation/javascript/get-api-key -->
-    <script
-      type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg"
-    ></script>
+
     <script type="text/javascript" src="{% static 'js/gmap3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/masonry.pkgd.min.js' %}"></script>
@@ -234,8 +232,10 @@
     <script type="text/javascript" src="{% static 'js/all.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/contact-form.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
-    <!--[if lt IE 10
-      ]><script type="text/javascript" src="{% static 'js/placeholder.js' %}"></script
-    ><![endif]-->
+    {% endcompress %}
+    <script
+    type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg"
+    ></script>
   </body>
 </html>
