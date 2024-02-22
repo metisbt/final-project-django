@@ -162,6 +162,16 @@ STATICFILES_FINDERS = (
     # 'compressor.filters.cssmin.CSSCompressorFilter',
 )
 
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static/'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "statics",
+]
+
 COMPRESS_ENABLED = True
 COMPRESS_ROOT = STATIC_ROOT ##django compressor
 COMPRESS_OFFLINE = True
