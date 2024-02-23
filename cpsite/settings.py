@@ -182,3 +182,6 @@ COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
 COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"] ##django compressor
 
 AUTHENTICATION_BACKENDS = ['cpsite.backends.EmailThenUsernameModelBackend']
+
+# maintenance
+MAINTENANCE_MODE = False
