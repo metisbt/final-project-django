@@ -71,10 +71,8 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -141,14 +139,14 @@ MULTI_CAPTCHA_ADMIN = {
 }
 
 # SMTP
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST ='smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USER_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'msabet0223@gmail.com'
-EMAIL_HOST_PASSWORD = '1401@mahdI'
-DEFAULT_FORM_EMAIL = EMAIL_HOST_USER
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST ='smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USER_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'msabet0223@gmail.com'
+# EMAIL_HOST_PASSWORD = '1401@mahdI'
+# DEFAULT_FORM_EMAIL = EMAIL_HOST_USER
 
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_EMAIL_VERIFICATION = "mandatory"
@@ -157,31 +155,20 @@ DEFAULT_FORM_EMAIL = EMAIL_HOST_USER
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
     'compressor.finders.CompressorFinder',
-    # 'compressor.filters.cssmin.CSSCompressorFilter',
 )
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static/'
-
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "statics",
-]
 
-COMPRESS_ENABLED = True
-COMPRESS_ROOT = STATIC_ROOT ##django compressor
-COMPRESS_OFFLINE = True
+COMPRESS_ENABLED = False
+COMPRESS_ROOT = '/home/metisbti/public_html/static'
+COMPRESS_OFFLINE = False
 
-if not COMPRESS_ENABLED: ##django compressor
-    COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
-COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"] ##django compressor
+# if not COMPRESS_ENABLED: 
+#     COMPRESS_ENABLED = True
+#     COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
+#     COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
 
 AUTHENTICATION_BACKENDS = ['cpsite.backends.EmailThenUsernameModelBackend']
-
-# maintenance
-MAINTENANCE_MODE = False

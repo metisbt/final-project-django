@@ -62,16 +62,6 @@ def blog_single(request, pid):
     if post.login_require:
          if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse('account_login'))
-        #  else:
-        #     context = {
-        #         'post' : post,
-        #         'next_post' : next_post,
-        #         'prev_post' : prev_post,
-        #         'comment' : comment,
-        #         'form' : form
-        #             }
-        #     return render(request, 'blog/blog-single.html', context)
-
     else:
         context = {
             'post' : post,
@@ -79,7 +69,7 @@ def blog_single(request, pid):
             'prev_post' : prev_post,
             'comment' : comment,
             'form' : form
-                }
+            }
         return render(request, 'blog/blog-single.html', context)
         
 def blog_search(request):
